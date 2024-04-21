@@ -1,19 +1,20 @@
-import {Application, json, urlencoded, Request, Response, NextFunction} from 'express'
-import http from 'http'
-import cors from 'cors'
-import compression from 'compression'
-import cookieSession from 'cookie-session'
-import helmet from 'helmet'
-import hpp from 'hpp'
-import {Server} from 'socket.io'
-import { createClient } from 'redis'
+import {Application, json, urlencoded, Request, Response, NextFunction} from 'express';
+import http from 'http';
+import cors from 'cors';
+import compression from 'compression';
+import cookieSession from 'cookie-session';
+import helmet from 'helmet';
+import hpp from 'hpp';
+import {Server} from 'socket.io';
+import { createClient } from 'redis';
 import Logger from 'bunyan';
-import 'express-async-errors'
-import {createAdapter} from '@socket.io/redis-adapter'
-import {config} from './config';
-import routesHandler from './routes';
-import { StatusCodes } from 'http-status-codes'
-import {CustomError, ErrorResponse} from './src/shared/globals/helpers/error-handler';
+import 'express-async-errors';
+import {createAdapter} from '@socket.io/redis-adapter';
+import { StatusCodes } from 'http-status-codes';
+
+import {config} from '@/root/config';
+import routesHandler from '@/root/routes';
+import {CustomError, ErrorResponse} from '@/globals/helpers/error-handler';
 
 const SERVER_PORT = 8080;
 
@@ -27,17 +28,17 @@ export class ServerSetup  {
     }
 
     public start() {
-        this.standardMiddleware(this.app)
-        this.securityMiddleware(this.app)
-        this.routeMiddleware(this.app)
+        this.standardMiddleware(this.app);
+        this.securityMiddleware(this.app);
+        this.routeMiddleware(this.app);
         this.errorHandlerMiddleware(this.app);
-        this.startServer(this.app)
+        this.startServer(this.app);
     }
 
     private standardMiddleware(app: Application): void {
-        app.use(json({limit:'50mb'}))
-        app.use(compression())
-        app.use(urlencoded({extended:true, limit:'50mb'}))
+        app.use(json({limit:'50mb'}));
+        app.use(compression());
+        app.use(urlencoded({extended:true, limit:'50mb'}));
     }
     private securityMiddleware(app: Application): void {
         app.use(cookieSession({
@@ -53,7 +54,7 @@ export class ServerSetup  {
             credentials: true,
             optionsSuccessStatus: 200,
             methods: ['GET', 'POST', 'PUT','OPTIONS','DELETE']
-        }))
+        }));
     }
     private routeMiddleware(app: Application): void {
         routesHandler(app);
@@ -65,10 +66,10 @@ export class ServerSetup  {
 
         app.use((error: ErrorResponse, _req: Request, res: Response,next: NextFunction)=> {
             if(error instanceof CustomError) {
-                return res.status(error.statusCode).json(error.serializeErrors())
+                return res.status(error.statusCode).json(error.serializeErrors());
             }
             next();
-        })
+        });
     }
     private async startServer(app: Application): Promise<void> {
         try{
@@ -102,9 +103,11 @@ export class ServerSetup  {
     private startHttpServer(httpServer: http.Server): void {
         httpServer.listen(SERVER_PORT,()=>{
             log.info(`Server running on port ${SERVER_PORT}`);
-        })
+        });
     }
 
-    private socketIOConnections(sockerServer: Server): void {}
+    private socketIOConnections(sockerServer: Server): void {
+      log.info('Socker connections');
+    }
 }
 
