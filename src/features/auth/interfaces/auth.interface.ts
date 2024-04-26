@@ -1,6 +1,6 @@
 import {Document} from 'mongoose';
 import {ObjectId} from 'mongodb';
-import { UserDocument } from '@/user/interfaces/user.interface';
+import { UserDocument } from '@user/interfaces/user.interface';
 
 
 declare global {
@@ -29,6 +29,8 @@ export interface AuthDocument extends Document {
   password?: string;
   avatarColor: string;
   createdAt: Date;
+  passwordResetToken?: string;
+  passwordResetTokenExpire?: number;
   comparePassword: (password: string)=>Promise<boolean>
   hashPassword: (password: string)=>Promise<string>
 }

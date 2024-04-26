@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { CurrentUser } from '../controllers/current-user';
-import { authMiddleware } from '@/globals/helpers/auth-middleware';
+import { authMiddleware } from '@globals/helpers/auth-middleware';
 
 
 class CurrentRoutes {

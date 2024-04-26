@@ -1,6 +1,6 @@
-import { AuthDocument } from '@/auth/interfaces/auth.interface';
-import Auth from '@/auth/models/auth.schema';
-import { Helpers } from '@/globals/helpers/helpers';
+import { AuthDocument } from '@auth/interfaces/auth.interface';
+import Auth from '@auth/models/auth.schema';
+import { Helpers } from '@globals/helpers/helpers';
 
 class AuthService {
   public async getUserByUsernameOrEmail(username: string, email: string): Promise<AuthDocument | null> {
@@ -20,6 +20,22 @@ class AuthService {
     const user = await Auth.findOne({username: Helpers.firstLetterUppercase(username)});
     return user;
   }
+
+  public async getUserByEmail(email: string) {
+    const user = await Auth.findOne({email: Helpers.toLowerCase(email)});
+    return user;
+ }
+
+ public async updatePasswordToken(authId: string, token: string, tokenExpiration: number) {
+    await Auth.updateOne({_id: authId}, {
+      passwordResetToken: token,
+      passwordResetTokenExpire: tokenExpiration
+    });
+ }
+
+ public getUserByPasswordToken(token: string): Promise<AuthDocument| null> {
+  return Auth.findOne({passwordResetToken: token, passwordResetTokenExpire: {$gt: Date.now()}});
+ }
 }
 
 

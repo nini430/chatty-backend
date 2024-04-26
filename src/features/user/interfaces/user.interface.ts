@@ -24,8 +24,6 @@ export interface UserDocument extends Document {
   bgImageId: string;
   profilePicture: string;
   createdAt?: Date;
-  passwordResetToken?: string;
-  passwordResetTokenExpires?: number;
 }
 
 export interface IResetPasswordParams {
@@ -88,7 +86,7 @@ export interface IUserJob {
 
 export interface IEmailJob {
   receiverEmail: string;
-  template: string;
+  template: any;
   subject: string;
 }
 

@@ -1,14 +1,13 @@
 import {Request,Response} from 'express';
-import { config } from '@/root/config';
+import { config } from '@root/config';
 import jwt from 'jsonwebtoken';
-import { JoiValidator } from '@/globals/decorators/joi-validation.decorator';
+import { JoiValidator } from '@globals/decorators/joi-validation.decorator';
 import { StatusCodes } from 'http-status-codes';
-import authService from '@/services/db/auth.service';
+import authService from '@services/db/auth.service';
 import { signinSchema } from '../schemes/signin';
 import { AuthDocument } from '../interfaces/auth.interface';
-import { BadRequestError } from '@/globals/helpers/error-handler';
-import { userService } from '@/services/db/user.service';
-
+import { BadRequestError } from '@globals/helpers/error-handler';
+import { userService } from '@services/db/user.service';
 export class Signin {
   @JoiValidator(signinSchema)
   async read(req: Request, res: Response) {
@@ -36,7 +35,7 @@ export class Signin {
       req.session = {jwt: token};
 
       const userDocument = {
-        ...user,
+        ...user[0],
         authId: existingUser._id,
         username: existingUser.username,
         email: existingUser.email,

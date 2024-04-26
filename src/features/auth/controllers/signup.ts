@@ -1,20 +1,20 @@
 
 import { ObjectId } from 'mongodb';
 import {Request, Response} from 'express';
-import { JoiValidator } from '@/globals/decorators/joi-validation.decorator';
+import { JoiValidator } from '@globals/decorators/joi-validation.decorator';
 import { signupSchema } from '../schemes/signup';
 import { AuthDocument, SignupData } from '../interfaces/auth.interface';
-import authService from '@/services/db/auth.service';
-import { BadRequestError } from '@/globals/helpers/error-handler';
-import { Helpers } from '@/globals/helpers/helpers';
-import { uploads } from '@/globals/helpers/cloudinary-upload';
+import authService from '@services/db/auth.service';
+import { BadRequestError } from '@globals/helpers/error-handler';
+import { Helpers } from '@globals/helpers/helpers';
+import { uploads } from '@globals/helpers/cloudinary-upload';
 import { StatusCodes } from 'http-status-codes';
-import { UserDocument } from '@/user/interfaces/user.interface';
-import { UserCache } from '@/services/redis/user.cache';
-import { config } from '@/root/config';
+import { UserDocument } from '@user/interfaces/user.interface';
+import { UserCache } from '@services/redis/user.cache';
+import { config } from '@root/config';
 import {omit} from 'lodash';
-import { authQueue } from '@/services/queues/auth.queue';
-import { userQueue } from '@/services/queues/user.queue';
+import { authQueue } from '@services/queues/auth.queue';
+import { userQueue } from '@services/queues/user.queue';
 import jwt from 'jsonwebtoken';
 
 const userCache: UserCache = new UserCache();
