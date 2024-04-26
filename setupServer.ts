@@ -12,9 +12,9 @@ import 'express-async-errors';
 import {createAdapter} from '@socket.io/redis-adapter';
 import { StatusCodes } from 'http-status-codes';
 
-import {config} from '@/root/config';
-import routesHandler from '@/root/routes';
-import {CustomError, ErrorResponse} from '@/globals/helpers/error-handler';
+import {config} from '@root/config';
+import routesHandler from '@root/routes';
+import {CustomError, ErrorResponse} from '@globals/helpers/error-handler';
 
 const SERVER_PORT = 8080;
 

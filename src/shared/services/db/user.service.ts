@@ -1,5 +1,5 @@
-import { UserDocument } from '@/user/interfaces/user.interface';
-import User from '@/user/models/user.model';
+import { UserDocument } from '@user/interfaces/user.interface';
+import User from '@user/models/user.model';
 import { ObjectId } from 'mongodb';
 import mongoose from 'mongoose';
 

@@ -25,7 +25,7 @@ withCredentials: true
 
 {
   "username":"ninikuna",
-  "password":"niniko"
+  "password":"ninikoko"
 }
 
 
@@ -39,3 +39,24 @@ withCredentials: true
 ###
 
 GET {{baseUrl}}/{{urlPath}}/current-user
+
+###
+
+POST {{baseUrl}}/{{urlPath}}/forgot-password
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "email":"ninikuna@gmail.com"
+}
+###
+POST {{baseUrl}}/{{urlPath}}/reset-password/7aa4f167d3172902c1f4455710e8cf277b719e97
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "password":"ninikoko",
+  "confirmPassword":"ninikoko"
+}

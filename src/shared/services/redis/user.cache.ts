@@ -1,7 +1,7 @@
-import { ServerError } from '@/globals/helpers/error-handler';
-import { Helpers } from '@/globals/helpers/helpers';
-import BaseCache from '@/services/redis/base.cache';
-import { UserDocument } from '@/user/interfaces/user.interface';
+import { ServerError } from '@globals/helpers/error-handler';
+import { Helpers } from '@globals/helpers/helpers';
+import BaseCache from '@services/redis/base.cache';
+import { UserDocument } from '@user/interfaces/user.interface';
 
 
 export class UserCache extends BaseCache {

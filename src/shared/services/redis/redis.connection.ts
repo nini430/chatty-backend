@@ -1,4 +1,4 @@
-import BaseCache from '@/services/redis/base.cache';
+import BaseCache from '@services/redis/base.cache';
 
 export class RedisConnection extends BaseCache {
   constructor() {

@@ -1,6 +1,6 @@
-import { userService } from '@/services/db/user.service';
-import { UserCache } from '@/services/redis/user.cache';
-import { UserDocument } from '@/user/interfaces/user.interface';
+import { userService } from '@services/db/user.service';
+import { UserCache } from '@services/redis/user.cache';
+import { UserDocument } from '@user/interfaces/user.interface';
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 

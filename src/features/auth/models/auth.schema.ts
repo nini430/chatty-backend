@@ -1,16 +1,19 @@
-import { AuthDocument } from '@/auth/interfaces/auth.interface';
+import { AuthDocument } from '@auth/interfaces/auth.interface';
 import {model, Model, Schema} from 'mongoose';
 import {hash, compare} from 'bcryptjs';
 
 const SALT_ROUND = 10;
 
-const authSchema = new Schema({
+const authSchema = new Schema<AuthDocument>({
   username: {type: String},
   uId: {type: String},
   email: {type: String},
   password: {type: String},
   avatarColor: {type: String},
   createdAt: {type: Date, default: Date.now},
+  passwordResetToken: {type: String, default:''},
+  passwordResetTokenExpire: {type: Number}
+
 },{
   toJSON: {
     transform(doc, ret) {

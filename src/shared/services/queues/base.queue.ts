@@ -3,15 +3,15 @@ import {createBullBoard} from '@bull-board/api';
 import {BullAdapter} from '@bull-board/api/bullAdapter';
 import {ExpressAdapter} from '@bull-board/express';
 import Logger from 'bunyan';
-import {config} from '@/root/config';
-import { AuthJob } from '@/auth/interfaces/auth.interface';
-import { IUserJob } from '@/user/interfaces/user.interface';
+import {config} from '@root/config';
+import { AuthJob } from '@auth/interfaces/auth.interface';
+import { IEmailJob, IUserJob } from '@user/interfaces/user.interface';
 
 export let bullAdapters: BullAdapter[]=[];
 
 export let serverAdapter: ExpressAdapter;
 
-type BaseJobData = AuthJob | IUserJob;
+type BaseJobData = AuthJob | IUserJob | IEmailJob;
 
 export abstract class BaseQueue {
   queue: Queue.Queue;
